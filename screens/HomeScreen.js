@@ -7,7 +7,7 @@ import {
   ScrollView,
   StatusBar,
 } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import {
   UserIcon,
@@ -17,15 +17,34 @@ import {
 } from "react-native-heroicons/outline";
 import Categories from "../components/Categories";
 import FeatureRow from "../components/FeatureRow";
+import sanityClient from "../sanity";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+
+  const [featureCategories, setFeatureCategories] = useState([])
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
   }, []);
+
+  useEffect(() => {
+    sanityClient.fetch(`
+    *[_type == "featured"]{
+      ...,
+       resturants[]->{
+        ...,
+        dishes[]->
+       }
+    }`).then(data => {
+      setFeatureCategories(data)
+    })
+  }, [])
+
+  console.log(featureCategories);
+  
   return (
     <SafeAreaView className="bg-white pt-5">
       <StatusBar backgroundColor="grey" />
@@ -70,25 +89,20 @@ const HomeScreen = () => {
         <Categories />
 
         {/* Featured */}
-        <FeatureRow
-        id="1"
-        title="Featured"
-        description="Paid placements from our partners"
-        />
 
-        {/* Tasty Discounts */}
-        <FeatureRow
-        id="2"
-        title="Tasty Discounts "
-        description="Everyone's is been enjoyi`"
-        />
 
-        {/* Offers near you */}
-        <FeatureRow
-        id="3"
-        title="Offers near you "
-        description="Paid placements from our partners"
-        />
+        {
+          featureCategories?.map(category =>(
+            <FeatureRow
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category.short_description}
+            />
+
+          ))
+        }
+
       </ScrollView>
     </SafeAreaView>
   );
