@@ -46,7 +46,7 @@ const HomeScreen = () => {
   console.log(featureCategories);
   
   return (
-    <SafeAreaView className="bg-white pt-5">
+    <SafeAreaView className="bg-white pt-10">
       <StatusBar backgroundColor="grey" />
       {/* HEADER */}
 
@@ -82,7 +82,7 @@ const HomeScreen = () => {
       <ScrollView
         className="bg-gray-100"
         contentContainerStyle={{
-          paddingBottom: 100,
+          paddingBottom: 130,
         }}
       >
         {/* Categories */}

@@ -44,11 +44,11 @@ export default {
       validation: (Rule)=> Rule.required().min(1).max(5).error("Please enter a Value between 1 and 5")
     },
     {
-      name: "type",
+      name: "category",
       title: "Category",
       validation: (Rule)=> Rule.required(),
-      type: "reference",
-      to: [{type: "category"}]
+      type: "string",
+      // to: [{type: "category"}]rr
     },
     {
       name: "dishes",

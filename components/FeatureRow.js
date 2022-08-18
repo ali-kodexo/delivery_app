@@ -14,9 +14,9 @@ const FeatureRow = ({ title, description, id }) => {
        resturants[]->{
         ...,
         dishes[]->,
-        type-> {
-          name
-        }
+        // type-> {
+        //   name
+        // }
        },
     }[0]
     `,
@@ -54,7 +54,7 @@ console.log("Resturants", resturants);
           title={resturant.name}
           dishes={resturant.dishes}
           rating={resturant.rating}
-          genre={resturant.type?.name}
+          genre={resturant.category}
           short_description={resturant.short_description}
           long={resturant.long}
           lat={resturant.lat}
