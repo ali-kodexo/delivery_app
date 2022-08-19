@@ -46,7 +46,7 @@ const HomeScreen = () => {
   console.log(featureCategories);
   
   return (
-    <SafeAreaView className="bg-white pt-10">
+    <SafeAreaView className="bg-white pt-5">
       <StatusBar backgroundColor="grey" />
       {/* HEADER */}
 
